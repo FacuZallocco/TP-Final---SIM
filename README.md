@@ -1,7 +1,5 @@
 **TP-Final - Simulación**
 
-Ejercicio:
-  •	Ejercicio 14
 Alumno:
   •	Zallocco Facundo – Legajo: 79472
 
