@@ -1,0 +1,4 @@
+*.pyc
+entorno_virtual/
+.idea/
+*/__pycache__/*

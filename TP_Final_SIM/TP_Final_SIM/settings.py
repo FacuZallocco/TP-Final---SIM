@@ -57,7 +57,7 @@ ROOT_URLCONF = 'TP_Final_SIM.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['TP_Final_SIM/templates'],
+        'DIRS': ['TP_Final_SIM/TP_Final_SIM/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
