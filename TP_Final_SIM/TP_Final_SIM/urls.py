@@ -19,4 +19,6 @@ from ejercicio14 import views
 urlpatterns = [
     path('', views.index),
     path('acercade/', views.acercade),
+    #path('ejercicio14/', views.simulacion.as_view()),
+    #path('ejercicio14-parte2/', views.simulacion.as_view()),
 ]

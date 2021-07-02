@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Ejercicio 14{% endblock %}
+
+{% block content %}
+
+
+<div class="index-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Trabajo Practico Final</h1>
+    <p class="lead">Ejercicio 14</p>
+</div>
+
+{% if form %}
+
+    <div class="container">
+        <!-- Parametros de entrada -->
+            <form class="bg-light mr-5" method="POST" enctype='multipart/form-data'>
+                {% csrf_token %}
+                {% crispy form form.helper %}
+                <!-- Boton Simular -->
+                <div class="row justify-content-center mb-3">
+                    <input type="submit" class="btn btn-info" value="Simular">
+                </div>
+            </form>
+    </div>
+
+
+{% else %}
+
+
+<div class="container mt-5">
+    <!-- Tabla de datos de entrada-->
+    <div class="index-header">
+        <h5>Datos de entrada de la simulacion</h5>
+    </div>
+    <div class="mt-3 text-center">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Dias simulados</th>
+                    <th>Dia de inicio de informe</th>
+                    <th>Dia de fin de informe</th>
+                    <th>Limite de reposicion</th>
+                    <th>Cantidad de reposicion</th>
+                    <th>Stock</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                {% for col in vectorEntrada %}
+                    <td>{{ col }}</td>
+                {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <!-- Tabla de resutado final de la simulacion-->
+    <div class="index-header">
+        <h5>Tabla de resultado final de la simulacion</h5>
+    </div>
+    <div class="mt-3 text-center">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Dia</th>
+                    <th>Demanda</th>
+                    <th>Demora</th>
+                    <th>Disponible</th>
+                    <th>Stock</th>
+                    <th>Faltante</th>
+                    <th>Estado de la orden</th>
+                    <th>Dia de llegada</th>
+                    <th>Costo por pedido</th>
+                    <th>Costo por mantenimiento</th>
+                    <th>Costo por faltante</th>
+                    <th>Costo total diario</th>
+                    <th>Acumulador costo total</th>
+                    <th>Costo promedio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                {% for col in vectorResultado %}
+                    <td>{{ col }}</td>
+                {% endfor %}
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <!-- Tabla de resutados de simulacion y Paginador-->
+    <div class="index-header ">
+        <h5>Tabla de intervalo de simulacion</h5>
+    </div>
+    <div class="mt-3 text-center">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Dia</th>
+                    <th>Demanda</th>
+                    <th>Demora</th>
+                    <th>Disponible</th>
+                    <th>Stock</th>
+                    <th>Faltante</th>
+                    <th>Estado de la orden</th>
+                    <th>Dia de llegada</th>
+                    <th>Costo por pedido</th>
+                    <th>Costo por mantenimiento</th>
+                    <th>Costo por faltante</th>
+                    <th>Costo total diario</th>
+                    <th>Acumulador costo total</th>
+                    <th>Costo promedio</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fila in matrizResultado %}
+                    <tr>
+                        {% for registro in fila %}
+                            <td>{{ registro }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <span class="label label-default font-weight-bold">Registros: {{RegistrosTotal}}</span>
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}
