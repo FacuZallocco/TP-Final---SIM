@@ -3,13 +3,14 @@ from django.views import generic
 from .forms import ParametersForm
 from . import soporte
 
-# Create your views here.
 
 def index(request):
     return render(request, "index.html")
 
+
 def acercade(request):
     return render(request, "acercade.html")
+
 
 #REVISAAAAAAAAAAAAAAAAAR
 class simulacion(generic.FormView):
@@ -24,15 +25,17 @@ class simulacion(generic.FormView):
         limiteReposicion = form.cleaned_data['limiteReposicion']
         cantReposicion = form.cleaned_data['cantReposicion']
         stock = form.cleaned_data['stock']
-        capacidad_almacen = form.cleaned_data['capacidad']
+        aumento_demanda = form.cleaned_data['aumento_demanda']
+
 
         stocki = stock
-        km = 350  # costo mantenimiento
-        ko = 50000  # costo del pedido
-        ks = 9500  # costo del stock-out
-        ki = 2000  # costo de imagen
+        capacidad_almacen = 1800
+        km = form.cleaned_data['km']  # costo mantenimiento
+        ko = form.cleaned_data['ko']   # costo del pedido
+        ks = form.cleaned_data['ks']   # costo del stock-out
+        ki = form.cleaned_data['ki']  # costo de imagen
         kp = 0  # costo x pedido por carburador
-        kc = 8000  # costo de sobrepasar la capacidad del almacén
+        kc = form.cleaned_data['kc']  # costo de sobrepasar la capacidad del almacén
         estadoPedido = ""
         cont = 0
 
@@ -49,6 +52,7 @@ class simulacion(generic.FormView):
         else:
             kp = cantReposicion * 4600
 
+
         registros = diaFin - diaInicio
         matrizCopia = [[0] * 15 for f in range(registros)]
 
@@ -59,14 +63,22 @@ class simulacion(generic.FormView):
             if i == 0:
                 matriz[0][4] = stock
                 banderaRecorrido = True
-            elif (banderaRecorrido):
+
+            elif banderaRecorrido:
                 # dias
                 matriz[1][0] = matriz[0][0] + 1
                 dia = matriz[1][0]
 
                 # Demanda
-                matriz[1][1] = soporte.generarDemanda()
-                demanda = matriz[1][1]
+                if aumento_demanda:
+                # Con aumento de la demanda en un 20%
+                    matriz[1][1] = round((soporte.generarDemanda())*1.20)
+                    demanda = matriz[1][1]
+
+                else:
+                # Con la demanda comun
+                    matriz[1][1] = round(soporte.generarDemanda())
+                    demanda = matriz[1][1]
 
                 # Demora
                 matriz[1][2] = soporte.generarDemora()
@@ -160,8 +172,14 @@ class simulacion(generic.FormView):
                 dia = matriz[0][0]
 
                 # Demanda
-                matriz[0][1] = soporte.generarDemanda()
-                demanda = matriz[0][1]
+                if aumento_demanda:
+                    # Con aumento de la demanda en un 20%
+                    matriz[0][1] = round((soporte.generarDemanda()) * 1.20)
+                    demanda = matriz[0][1]
+                else:
+                    # Con la demanda comun
+                    matriz[0][1] = round(soporte.generarDemanda())
+                    demanda = matriz[0][1]
 
                 # Demora
                 matriz[0][2] = soporte.generarDemora()
@@ -255,7 +273,13 @@ class simulacion(generic.FormView):
         else:
             vectorResultado = matriz[1]
 
+        if aumento_demanda:
+            aumento_demanda = "Si"
+        else:
+            aumento_demanda = "No"
+
         return render(self.request, self.template_name,
                       {"vectorResultado": vectorResultado, "RegistrosTotal": registros, "matrizResultado": matrizCopia,
-                       "vectorEntrada": [dias, diaInicio, diaFin, limiteReposicion, cantReposicion, stocki]})
+                       "vectorEntrada": [dias, diaInicio, diaFin, limiteReposicion, cantReposicion, stocki,
+                                         capacidad_almacen,aumento_demanda]})
 

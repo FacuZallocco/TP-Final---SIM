@@ -3,11 +3,10 @@ import random, math
 #REVISAAAAAAAAAAAAAAR
 def generarDemanda():
     #normal
-    for i in range(1):
-        random1 = random.random()
-        random2 = random.random()
-        n1 = ((math.sqrt(-2 * math.log(random1)) * math.cos(2 * math.pi * random2)) * 50) + 300
-        n2 = ((math.sqrt(-2 * math.log(random1)) * math.sin(2 * math.pi * random2)) * 50) + 300
+    random1 = random.random()
+    random2 = random.random()
+    n1 = ((math.sqrt(-2 * math.log(random1)) * math.cos(2 * math.pi * random2)) * 50) + 300
+    n2 = ((math.sqrt(-2 * math.log(random1)) * math.sin(2 * math.pi * random2)) * 50) + 300
 
     return n1
 
