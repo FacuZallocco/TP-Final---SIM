@@ -72,13 +72,14 @@ class simulacion(generic.FormView):
                 # Demanda
                 if aumento_demanda:
                 # Con aumento de la demanda en un 20%
-                    matriz[1][1] = round((soporte.generarDemanda())*1.20)
+                    matriz[1][1] = round((soporte.generarDemanda()) * 1.20)
                     demanda = matriz[1][1]
 
                 else:
                 # Con la demanda comun
                     matriz[1][1] = round(soporte.generarDemanda())
                     demanda = matriz[1][1]
+
 
                 # Demora
                 matriz[1][2] = soporte.generarDemora()
@@ -176,10 +177,13 @@ class simulacion(generic.FormView):
                     # Con aumento de la demanda en un 20%
                     matriz[0][1] = round((soporte.generarDemanda()) * 1.20)
                     demanda = matriz[0][1]
+
+
                 else:
                     # Con la demanda comun
                     matriz[0][1] = round(soporte.generarDemanda())
                     demanda = matriz[0][1]
+
 
                 # Demora
                 matriz[0][2] = soporte.generarDemora()

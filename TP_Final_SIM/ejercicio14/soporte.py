@@ -1,4 +1,6 @@
-import random, math
+import math
+import random
+
 
 #REVISAAAAAAAAAAAAAAR
 def generarDemanda():
