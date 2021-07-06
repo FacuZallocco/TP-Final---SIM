@@ -288,5 +288,5 @@ class simulacion(generic.FormView):
         return render(self.request, self.template_name,
                       {"vectorResultado": vectorResultado, "RegistrosTotal": registros, "matrizResultado": matrizCopia,
                        "vectorEntrada": [dias, diaInicio, diaFin, limiteReposicion, cantReposicion, stocki,
-                                         capacidad_almacen,aumento_demanda]})
+                                         capacidad_almacen, aumento_demanda, ko, km, ks, ki, kc]})
 
