@@ -76,11 +76,13 @@ class simulacion(generic.FormView):
                     demanda = matriz[1][1]
                     box_muller += 1
 
+
                 else:
                 # Con la demanda comun
                     matriz[1][1] = round(soporte.generarDemanda(box_muller))
                     demanda = matriz[1][1]
                     box_muller += 1
+
 
 
                 # Demora
@@ -181,6 +183,7 @@ class simulacion(generic.FormView):
                     matriz[0][1] = round((soporte.generarDemanda(box_muller)) * 1.20)
                     demanda = matriz[0][1]
                     box_muller = 0
+
 
                 else:
                     # Con la demanda comun
