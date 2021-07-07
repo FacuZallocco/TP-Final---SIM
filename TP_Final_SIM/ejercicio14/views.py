@@ -138,7 +138,8 @@ class simulacion(generic.FormView):
 
                 # Costo de Ko
                 if estadoPedido == "S":
-                    matriz[1][8] = ko + ki + kp
+                    costo_imagen = ki * cantReposicion
+                    matriz[1][8] = ko + costo_imagen + kp
                 else:
                     matriz[1][8] = 0
 
@@ -243,7 +244,8 @@ class simulacion(generic.FormView):
 
                 # Costo de Ko
                 if estadoPedido == "S":
-                    matriz[0][8] = ko + ki + kp
+                    costo_imagen = ki * cantReposicion
+                    matriz[0][8] = ko + costo_imagen + kp
                 else:
                     matriz[0][8] = 0
 
